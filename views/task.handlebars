@@ -1,0 +1,58 @@
+<h1>Task Info</h1>
+<h6><i>#{{ task._id }}</i></h6>
+<a href="/tasks"><- Back to Task list</a>
+<hr>
+<!-- IF TASK EXISTS: SHOW TASK -->
+{{#if taskExists}}
+  <!-- TO DO: if isLoggedIn has to be doesHavePermission -->
+    {{#if isAuthorized}}
+    <form class="" action="/tasks/{{task._id}}/update" method="post">
+      <!-- TASK'S TITLE -->
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Title</span>
+        </div>
+        <input type="text" class="form-control" name="title" placeholder="..." value="{{ task.title }}" required> <!-- required = Bootstrap's behaviour -->
+      </div>
+      <br>
+      <!-- TASK'S DESCRIPTION -->
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Description</span>
+        </div>
+        <input type="text" class="form-control" name="description" placeholder="..." value="{{ task.description }}">
+      </div>
+      <br>
+      <!-- TASK'S DATE -->
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Date</span>
+        </div>
+        <input type="date" class="form-control" name="date" value="{{dateFormat task.date "YYYY-MM-DD"}}">
+      </div>
+      <br>
+      <!-- TASK'S CATEGORY -->
+      <div class="input-group">
+        <select class="form-control" name="category" placeholder="Task category" >
+          <!-- todo: OPTIONS BY JAVASCRIPT: -->
+          <option value="{{task.category}}">{{task.category}}</option>
+        </select>
+      </div>
+      <hr>
+      <!-- SAVE CHANGES BUTTON -->
+      <!-- CSRF TOKEN -->
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <button class="btn btn-warning" type="submit" name="button">Save Changes</button>
+      {{else}}
+      <div class="alert alert-danger" role="alert">
+        Please Log In. You don't have permissions to access this task
+      </div>
+      {{/if}}
+    </form>
+  <!-- IF DOESNT HAVE PERMISSION -->
+<!-- IF TASK DOESN'T EXIST: SHOW ALERT -->
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Task Doesn't Exist
+  </div>
+{{/if}}

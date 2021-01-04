@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-12">
+   <form id="add_task_form" class="needs-validation" action="/tasks" method="POST"> <!-- .needs-validation - Bootstrap's class -->
+     <!-- TASK TITLE INPUT -->
+     <div class="form-group">
+       <input type="text" class="form-control" name="title" placeholder="Task title" required> <!-- required - Bootstrap's behaviour -->
+     </div>
+     <!-- TASK DESCRIPTION INPUT -->
+     <div class="form-group">
+       <input type="text" class="form-control" name="description" placeholder="Task description">
+     </div>
+     <!-- TASK DATE + CATEGORY INPUTS -->
+     <div class="row">
+       <!-- TASK DATE INPUT -->
+       <div class="col-lg-6 col-sm-12">
+         <div class="form-group">
+           <input type="date" class="form-control" name="date" value="">
+         </div>
+       </div>
+       <!-- TASK CATEGORY INPUT -->
+       <div class="col-lg-6 col-sm-12">
+         <div class="form-group">
+           <select class="form-control" name="category" placeholder="Task category">
+             <!-- todo: OPTIONS BY JAVASCRIPT: -->
+             <option value="Inbox">Inbox</option>
+           </select>
+         </div>
+       </div>
+     </div>
+     <!-- CSRF TOKEN -->
+     <input type="hidden" name="_csrf" value="{{csrfToken}}">
+     <!-- SUBMIT BUTTON -->
+     <button type="submit" class="btn btn-dark">Add Task</button>
+   </form>
+  </div>
+</div>

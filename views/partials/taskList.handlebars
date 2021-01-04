@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12">
+    <ul class="list-group">
+      {{#each tasks}}
+        <li class="list-group-item">
+          <!-- TASK'S TITLE -->
+          <a href="/tasks/{{this._id}}">{{this.title}}</a>
+          <br>
+          <!-- TASK'S INFO --->
+          <small>
+            <!-- TASK'S DESCRIPTION -->
+            <i style="display: block">{{this.description}}</i>
+            <!-- TASKS'S CATEGORY + DATE -->
+            <span style="display: block">
+              <u>{{this.category}}</u>,
+              {{dateFormat this.date "DD MMMM YYYY"}}
+            </span>
+          </small>
+          <!-- EDIT + REMOVE BUTTONS -->
+          <form class="form-group" action="/tasks/{{this._id}}/remove" method="post">
+            <!-- EDIT BUTTON -->
+            <a href="/tasks/{{this._id}}" style="text-decoration: none"> <!-- button + link underline (text-decoration) fix -->
+              <button type="button" class="btn btn-light">Edit</button>
+            </a>
+            <!-- CSRF TOKEN -->
+            <!-- ../ is a reference to the parent's component scope -->
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <!-- REMOVE BUTTON -->
+            <button
+              type="submit"
+              class="btn btn-light">
+              Remove
+            </button>
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+    <hr>
+  </div>
+</div>

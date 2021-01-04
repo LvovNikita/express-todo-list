@@ -1,0 +1,35 @@
+<h1>Login</h1>
+{{>navigation}}
+<!-- IF LOGGED IN: SHOW ALERT -->
+{{#if isLoggedIn}}
+  <div class="alert alert-success" role="alert">
+    You are logged in already! <a href="/tasks">Go to tasks</a>
+  </div
+
+  <!-- ELSE: SHOW LOGIN FORM -->
+{{else}}
+  <form class="" action="/login" method="post">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" name="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" placeholder="Password">
+    </div>
+    <!-- CSRF TOKEN -->
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button type="submit" name="button" class="btn btn-primary">Login</button>
+  </form>
+  {{#if errorMessage}}
+    <br>
+    <div class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+    <a href="/reset">Reset password</a>
+  {{/if}}
+  <hr>
+  <div class="alert alert-warning" role="alert">
+    Don't have an account? Please <a href="/signup">Sign Up</a>
+  </div>
+{{/if}}
